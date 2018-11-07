@@ -11,9 +11,8 @@
           <div class="collapse-item" :key="index">
             <div class="left-part">
               <img class="user_avatar" :src="item.author.avatar_url" :alt="item.author.avatar_url">
-            <span class="reply_count">{{item.reply_count+'/'+item.visit_count}}</span>
-            <el-tag size="mini">{{item.tab}}</el-tag>
-            <span class="mark">{{item.tab}}</span>
+            <span class="reply_count">{{item.reply_count+'/'+item.visit_count}}</span>            
+            <span class="mark"><el-tag size="mini">{{item.tab}}</el-tag></span>
             <span>{{item.title}}</span>
             </div>
             <div class="right-part">
@@ -89,6 +88,10 @@ export default {
     text-align: center;
     font-size: 12px;
     color: #999999;
+  }
+  .mark{
+    width: 50px;
+    justify-content: center;
   }
 }
 </style>
