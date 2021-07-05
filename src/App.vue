@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-      <layout-header></layout-header>
-      <layout-container>
-        <router-view slot="main"></router-view>
-      </layout-container>
+    <layout-header></layout-header>
+    <layout-container>
+      <router-view slot="main"></router-view>
+    </layout-container>
   </div>
 </template>
 
@@ -15,16 +15,20 @@ export default {
   name: 'app',
   components: {
     layoutHeader,
-    layoutContainer
-  }
+    layoutContainer,
+  },
 }
 </script>
 
 <style>
-  body{
-    background: #f6f6f6;
-  }
+body {
+  width: 100%;
+  height: 100%;
+  background: #f6f6f6;
+}
 #app {
+  width: 100%;
+  height: 100%;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
