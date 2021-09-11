@@ -22,9 +22,9 @@ const routes = [
     path: '/virtualList',
     name: 'VirtualList',
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (virtualList.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/VirtualListDemo.vue')
+    component: () => import(/* webpackChunkName: "virtualList" */ '../views/VirtualListDemo.vue')
   }
 ]
 
