@@ -6,6 +6,7 @@
         搜索
       </button>
       <p>{{ currentLocationInfo.formattedAddress }}</p>
+      <p>{{ currentLocationInfo.lng }},{{ currentLocationInfo.lat }}</p>
     </div>
     <div class="amap_canvas" id="ampaWrap"></div>
   </div>
@@ -54,7 +55,7 @@ export default {
     },
     setMapCenter ({ lng, lat }) {
       AMapIns.setCenter([lng, lat])
-      AMapIns.setZoom(14)
+      AMapIns.setZoom(17)
     },
     getMapCenter () {
       const center = AMapIns.getCenter()
@@ -63,7 +64,11 @@ export default {
     getAddress ({ lng, lat }) {
       AMapService.Geocoder.getAddress([lng, lat], (status, result) => {
         const { regeocode } = result
-        this.currentLocationInfo = regeocode
+        console.log(
+          '🚀 ~ file: aMapPlugin.vue ~ line 66 ~ AMapService.Geocoder.getAddress ~ regeocode',
+          regeocode
+        )
+        this.currentLocationInfo = { ...regeocode, lng, lat }
       })
     }
   },
@@ -84,7 +89,7 @@ export default {
   width: 100%;
   height: 100%;
   .amap_search_bar {
-    height: 50px;
+    height: 80px;
     p {
       margin: 0;
     }
@@ -94,7 +99,8 @@ export default {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: ~"calc(100% - 50px)";
+    height: ~"calc(100% - 80px)";
+    min-height: 400px;
     &::after {
       font-family: "iconfont";
       content: "\e617";
