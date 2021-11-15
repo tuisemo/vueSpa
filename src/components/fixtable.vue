@@ -123,7 +123,8 @@ table {
   overflow-x: auto;
   overflow-y: auto;
   width: 100%;
-  height: ~"calc(100% - 38px)";
+  height: ~"calc(100% - 48px)";
+  padding-bottom: 10px;
   &::-webkit-scrollbar {
     width: 7px;
     height: 7px;
