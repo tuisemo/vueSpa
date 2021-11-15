@@ -165,7 +165,6 @@ table {
     top: 0;
     z-index: 9;
     background: #fff;
-    visibility: hidden;
   }
   .fix-left {
     position: absolute;
