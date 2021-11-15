@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <!---->
-    <div class="fix-top">
+    <div class="table-head">
       <table :style="{ transform: `translateX(${-scrollLeft}px)` }">
         <thead>
           <tr>
@@ -12,8 +12,8 @@
         </thead>
       </table>
     </div>
-    <div class="table-wrap" ref="tableWrap" @scroll="onTableScroll">
-      <table class="table">
+    <div class="table-body" ref="tableWrap" @scroll="onTableScroll">
+      <table>
         <tbody>
           <tr v-for="(tr, i) in tbody" :key="i">
             <td v-for="(td, j) in tr" :key="j">
@@ -23,15 +23,17 @@
         </tbody>
       </table>
     </div>
-    <div class="fix-left">
-      <table>
+    <div class="table-fix" :class="{ shadow: scrollLeft > 0 }">
+      <table class="fix-top">
         <thead>
-          <th v-for="(item, i) in thead" :key="i">
-            <div class="th">{{ item }}</div>
-          </th>
+          <tr>
+            <th v-for="(item, i) in thead" :key="i">
+              <div class="th"></div>
+            </th>
+          </tr>
         </thead>
       </table>
-      <table>
+      <table class="fix-left">
         <tbody :style="{ transform: `translateY(${-scrollTop}px)` }">
           <tr v-for="(tr, i) in tbody" :key="i">
             <td v-for="(td, j) in tr" :key="j">
@@ -76,31 +78,23 @@ table {
   font-family: verdana, arial, sans-serif;
   font-size: 11px;
   color: #333333;
-  border-width: 1px;
-  //   border-color: #666666;
-  //   border-collapse: collapse;
   thead {
     th {
-      border-width: 1px;
-      //   padding: 8px;
-      border-style: solid;
-      //   border-color: #666666;
-      background-color: #dedede;
+      border: 1px solid transparent;
       .th {
         width: 80px;
         height: 30px;
         background: #fff;
+        white-space: normal;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
   }
   tbody {
     tr {
       td {
-        border-width: 1px;
-        // padding: 8px;
-        border-style: solid;
-        // border-color: #666666;
-        background-color: #ffffff;
+        border: 1px solid #ddd;
         .td {
           width: 80px;
           height: 30px;
@@ -110,20 +104,21 @@ table {
     }
   }
 }
-.fix-top {
+.table-head {
   position: relative;
   width: 100%;
   overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+  }
 }
-.fix-left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 86px;
-  height: ~"calc(100% - 7px)";
-  overflow: hidden;
-}
-.table-wrap {
+.table-body {
   position: relative;
   overflow-x: auto;
   overflow-y: auto;
@@ -150,8 +145,44 @@ table {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
     background-color: #c8c8c8;
   }
+  table {
+    overflow: scroll;
+  }
 }
-.table {
-  overflow: scroll;
+.table-fix {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 86px;
+  height: ~"calc(100% - 7px)";
+  overflow: hidden;
+  background: #fff;
+  &.shadow {
+    box-shadow: ~"0 0 10px rgb(0 0 0 /12%)";
+  }
+  .fix-top {
+    position: absolute;
+    top: 0;
+    z-index: 9;
+    background: #fff;
+    visibility: hidden;
+  }
+  .fix-left {
+    position: absolute;
+    top: 38px;
+    z-index: 8;
+  }
+  table {
+    border: none;
+    thead,
+    tbody {
+      tr {
+        th,
+        td {
+          border-color: transparent;
+        }
+      }
+    }
+  }
 }
 </style>
