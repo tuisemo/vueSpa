@@ -1,10 +1,12 @@
-const { FileListPlugin } = require("./plugins/myCustomPlugin");
+const {
+  FileListPlugin
+} = require('./plugins/myCustomPlugin')
 module.exports = {
   configureWebpack: {
     plugins: [
       new FileListPlugin({
-        outputFile: "./my-assets.md",
-      }),
-    ],
-  },
-};
+        outputFile: './dist.zip'
+      })
+    ]
+  }
+}
